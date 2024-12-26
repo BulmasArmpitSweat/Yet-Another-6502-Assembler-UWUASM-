@@ -1,3 +1,5 @@
+// Fibonacci test file
+// Stolen from https://gist.github.com/pedrofranceschi/1285964
 LDX #$01
 STX $00
 
