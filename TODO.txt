@@ -1,0 +1,6 @@
+1. Labels - DONE
+2. Variables
+3. more options (.org, .setcpu, etc.)
+4. Better command-line options
+5. padding options
+6. Macros (maybe)
