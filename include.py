@@ -76,4 +76,25 @@ class TokenType:
 
 assembler_options = {
     "__NO-UNDOCUMENTED-INSTRUCTION-WARNING": False,
+    "_KEEP_TEMPORARY_FILES": False,
+}
+
+# Addressing mode definitions
+addressing_modes = {
+    Addr_Modes.IMPLIED:                      [TokenType.MNEMONIC, TokenType.EOF],
+    Addr_Modes.ACCUMULATOR:                  [TokenType.MNEMONIC, TokenType.MNEMONIC, TokenType.EOF],
+    Addr_Modes.IMMEDIATE:                    [TokenType.MNEMONIC, TokenType.HASH, TokenType.LITERAL_8BIT, TokenType.EOF],
+    Addr_Modes.ABSOLUTE:                     [TokenType.MNEMONIC, TokenType.LITERAL_16BIT, TokenType.EOF],
+    Addr_Modes.X_INDEXED_ABSOLUTE:           [TokenType.MNEMONIC, TokenType.LITERAL_16BIT, TokenType.COMMA, TokenType.MNEMONIC, TokenType.EOF],
+    Addr_Modes.Y_INDEXED_ABSOLUTE:           [TokenType.MNEMONIC, TokenType.LITERAL_16BIT, TokenType.COMMA, TokenType.MNEMONIC, TokenType.EOF],
+    Addr_Modes.ABSOLUTE_INDIRECT:            [TokenType.MNEMONIC, TokenType.OPENING_BRACKET, TokenType.LITERAL_16BIT, TokenType.CLOSING_BRACKET, TokenType.EOF],
+    Addr_Modes.ZERO_PAGE:                    [TokenType.MNEMONIC, TokenType.LITERAL_8BIT, TokenType.EOF],
+    Addr_Modes.X_INDEXED_ZERO_PAGE:          [TokenType.MNEMONIC, TokenType.LITERAL_8BIT, TokenType.COMMA, TokenType.MNEMONIC, TokenType.EOF],
+    Addr_Modes.Y_INDEXED_ZERO_PAGE:          [TokenType.MNEMONIC, TokenType.LITERAL_8BIT, TokenType.COMMA, TokenType.MNEMONIC, TokenType.EOF],
+    Addr_Modes.X_INDEXED_ZERO_PAGE_INDIRECT: [TokenType.MNEMONIC, TokenType.OPENING_BRACKET, TokenType.LITERAL_8BIT, TokenType.COMMA, TokenType.MNEMONIC, TokenType.CLOSING_BRACKET, TokenType.EOF],
+    Addr_Modes.ZERO_PAGE_INDIRECT_Y_INDEXED: [TokenType.MNEMONIC, TokenType.OPENING_BRACKET, TokenType.LITERAL_8BIT, TokenType.CLOSING_BRACKET, TokenType.COMMA, TokenType.MNEMONIC, TokenType.EOF],
+    Addr_Modes.ASSEMBLER_OPTION:             [TokenType.HASH, TokenType.OPT, TokenType.EQUALS, TokenType.ASSEMBLER_OPTION, TokenType.EOF],
+    Addr_Modes.LABEL:                        [TokenType.MNEMONIC, TokenType.COLON, TokenType.EOF],
+    Addr_Modes.JUMP_LABEL:                   [TokenType.MNEMONIC, TokenType.COMMA, TokenType.MNEMONIC, TokenType.EOF]
+    # The separator (TokenType.COMMA) is inserted before the file is split and cleaned up.
 }

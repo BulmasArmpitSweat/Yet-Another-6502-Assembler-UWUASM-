@@ -1,5 +1,59 @@
 from include import Addr_Modes
 
+literal_position = {
+    Addr_Modes.IMPLIED:                      0,
+    Addr_Modes.ACCUMULATOR:                  0,
+    Addr_Modes.IMMEDIATE:                    2,
+    Addr_Modes.ABSOLUTE:                     1,
+    Addr_Modes.X_INDEXED_ABSOLUTE:           1,
+    Addr_Modes.Y_INDEXED_ABSOLUTE:           1,
+    Addr_Modes.ABSOLUTE_INDIRECT:            2,
+    Addr_Modes.ZERO_PAGE:                    1,
+    Addr_Modes.X_INDEXED_ZERO_PAGE:          1,
+    Addr_Modes.Y_INDEXED_ZERO_PAGE:          1,
+    Addr_Modes.X_INDEXED_ZERO_PAGE_INDIRECT: 2,
+    Addr_Modes.ZERO_PAGE_INDIRECT_Y_INDEXED: 2,
+    Addr_Modes.ASSEMBLER_OPTION:             0,
+    Addr_Modes.LABEL:                        0,
+    Addr_Modes.JUMP_LABEL:                   0,
+}
+
+size_in_bytes = {
+    Addr_Modes.IMPLIED:                      1,
+    Addr_Modes.ACCUMULATOR:                  1,
+    Addr_Modes.IMMEDIATE:                    2,
+    Addr_Modes.ABSOLUTE:                     3,
+    Addr_Modes.X_INDEXED_ABSOLUTE:           3,
+    Addr_Modes.Y_INDEXED_ABSOLUTE:           3,
+    Addr_Modes.ABSOLUTE_INDIRECT:            3,
+    Addr_Modes.ZERO_PAGE:                    2,
+    Addr_Modes.X_INDEXED_ZERO_PAGE:          2,
+    Addr_Modes.Y_INDEXED_ZERO_PAGE:          2,
+    Addr_Modes.X_INDEXED_ZERO_PAGE_INDIRECT: 2,
+    Addr_Modes.ZERO_PAGE_INDIRECT_Y_INDEXED: 2,
+    Addr_Modes.ASSEMBLER_OPTION:             0,
+    Addr_Modes.LABEL:                        0,
+    Addr_Modes.JUMP_LABEL:                   3,
+}
+
+arg_types = {
+    Addr_Modes.IMPLIED:                      0,
+    Addr_Modes.ACCUMULATOR:                  0,
+    Addr_Modes.IMMEDIATE:                    8,
+    Addr_Modes.ABSOLUTE:                     16,
+    Addr_Modes.X_INDEXED_ABSOLUTE:           16,
+    Addr_Modes.Y_INDEXED_ABSOLUTE:           16,
+    Addr_Modes.ABSOLUTE_INDIRECT:            16,
+    Addr_Modes.ZERO_PAGE:                    8,
+    Addr_Modes.X_INDEXED_ZERO_PAGE:          8,
+    Addr_Modes.Y_INDEXED_ZERO_PAGE:          8,
+    Addr_Modes.X_INDEXED_ZERO_PAGE_INDIRECT: 8,
+    Addr_Modes.ZERO_PAGE_INDIRECT_Y_INDEXED: 8,
+    Addr_Modes.ASSEMBLER_OPTION:             0,
+    Addr_Modes.LABEL:                        0,
+    Addr_Modes.JUMP_LABEL:                   16,
+}
+
 # mnemonic: [[Supported Addressing Modes], [Hexadecimal bytecodes for each Adressing Mode], [Whether that specific instruction Addresing mode is considered "undocumented" or not]]
 instruction_info = {
     'LAS': [[Addr_Modes.Y_INDEXED_ABSOLUTE],

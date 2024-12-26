@@ -1,0 +1,1969 @@
+HelpMessage("LAS",
+        "\"AND\" memory with stack pointer",
+        "M & SP -> A X SP",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This undocumented instruction performs a bit-by-bit \"AND\" operation of the stack pointer and memory and
+        stores the result back in the accumulator, the index register X and the stack pointer.
+
+                The LAS instruction does not affect the carry or overflow flags. It sets N if the bit 7 of the result is on,
+        otherwise it is reset. If the result is zero, then the Z flag is set, otherwise it is reset.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.Y_INDEXED_ABSOLUTE, 0xBB, 3, "4+p", True)
+        ],
+    )
+HelpMessage("LAX",
+        "Load accumulator and index register X from memory",
+        "M -> A X",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The undocumented LAX instruction loads the accumulator and the index register X from memory.
+
+                LAX does not affect the C or V flags; sets Z if the value loaded was zero, otherwise resets it; sets N if the
+        value loaded in bit 7 is a 1; otherwise N is reset, and affects only the X register.",
+        7,
+        [
+            [IMMEDIATE                   , 0xAB, 2, 2, True],
+            [ABSOLUTE                    , 0xAF, 3, 4, True],
+            [Y_INDEXED_ABSOLUTE          , 0xBF, 3, "4+p", True],
+            [ZERO_PAGE                   , 0xA7, 2, 3, True],
+            [Y_INDEXED_ZERO_PAGE         , 0xB7, 2, 4, True],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0xA3, 2, 6, True],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0xB3, 2, "5+p", True)
+        ],
+    )
+HelpMessage("LDA",
+        "Load Accumulator from memory",
+        "M -> A",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "When instruction LDA is executed by the microprocessor, data is transferred from memory to the
+        accumulator and stored in the accumulator.
+
+                LDA affects the contents of the accumulator, does not affect the carry or overflow flags; sets the zero
+        flag if the accumulator is zero as a result of the LDA, otherwise resets the zero flag; sets the negative
+        flag if bit 7 of the accumulator is a 1, otherwise resets the negative flag.",
+        8,
+        [
+            [IMMEDIATE                   , 0xA9, 2, 2, False],
+            [ABSOLUTE                    , 0xAD, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0xBD, 3, "4+p", False],
+            [Y_INDEXED_ABSOLUTE          , 0xB9, 3, "4+p", False],
+            [ZERO_PAGE                   , 0xA5, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0xB5, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0xA1, 2, 6, False],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0xB1, 2, "5+p", False)
+        ],
+    )
+HelpMessage("LDX",
+        "Load index X register from memory",
+        "M -> X",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "Load the index register X from memory
+
+                LDX does not affect the C or V flags; sets Z if the value loaded was zero, otherwise resets it; sets N if
+        the value loaded in bit 7 is a 1; otherwise N is reset, and only affects the X register.",
+        5,
+        [
+            [IMMEDIATE          , 0xA2, 2, 2, False],
+            [ABSOLUTE           , 0xAE, 3, 4, False],
+            [Y_INDEXED_ABSOLUTE , 0xBE, 3, "4+p", False],
+            [ZERO_PAGE          , 0xA6, 2, 3, False],
+            [Y_INDEXED_ZERO_PAGE, 0xB6, 2, 4, False],
+        ],
+    )
+HelpMessage("LDY",
+        "Load index Y register from memory",
+        "M -> Y",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "Load the index register Y from memory
+
+                LDX does not affect the C or V flags; sets Z if the value loaded was zero, otherwise resets it; sets N if
+        the value loaded in bit 7 is a 1; otherwise N is reset, and only affects the Y register.",
+        5,
+        [
+            [IMMEDIATE          , 0xA0, 2, 2, False],
+            [ABSOLUTE           , 0xAC, 3, 4, False],
+            [Y_INDEXED_ABSOLUTE , 0xBC, 3, "4+p", False],
+            [ZERO_PAGE          , 0xA4, 2, 3, False],
+            [Y_INDEXED_ZERO_PAGE, 0xB4, 2, 4, False],
+        ],
+    )
+HelpMessage("SAX",
+        "Store accumulator \"AND\" index register X in memory",
+        "A & X -> M",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "The undocumented SAX instruction performs a bit-by-bit AND operation of the value of the accumulator and
+        the value of the index register X and stores the result in memory.
+
+                No flags or registers in the microprocessor are affected by the store operation.",
+        4,
+        [
+            [ABSOLUTE                    , 0x8F, 3, 4, True],
+            [ZERO_PAGE                   , 0x87, 2, 3, True],
+            [Y_INDEXED_ZERO_PAGE         , 0x97, 2, 4, True],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x83, 2, 6, True],
+        ],
+    )
+HelpMessage("SHA",
+        "Store accumulator \"AND\" index register X \"AND\" value",
+        "A & X & V -> M",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "The undocumented SHA instruction performs a bit-by-bit AND operation of the following three operands:
+        The first two are the accumulator and the index register X.
+
+                The third operand depends on the addressing mode. In the zero page indirect Y-indexed case, the third
+        operand is the data in memory at the given zero page address (ignoring the addressing mode's Y offset)
+        plus 1. In the Y-indexed absolute case, it is the upper 8 bits of the given address (ignoring the addressing
+        mode's Y offset), plus 1.
+
+                It then transfers the result to the addressed memory location.
+
+                No flags or registers in the microprocessor are affected by the store operation.",
+        2,
+        [
+            [Y_INDEXED_ABSOLUTE          , 0x9F, 3, 5, True],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0x93, 2, 6, True],
+        ],
+    )
+HelpMessage("SHX",
+        "Store index register X \"AND\" value",
+        "X & (H + 1) -> M",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "The undocumented SHX instruction performs a bit-by-bit AND operation of the index register X and the
+        upper 8 bits of the given address (ignoring the addressing mode's Y offset), plus 1. It then transfers the
+        result to the addressed memory location.
+
+                No flags or registers in the microprocessor are affected by the store operation.",
+        1,
+        [
+            [Y_INDEXED_ABSOLUTE, 0x9E, 3, 5, True],
+        ],
+    )
+HelpMessage("SHY",
+        "Store index register Y \"AND\" value",
+        "Y & (H + 1) -> M",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "The undocumented SHY instruction performs a bit-by-bit AND operation of the index register Y and the
+        upper 8 bits of the given address (ignoring the addressing mode's X offset), plus 1. It then transfers the
+        result to the addressed memory location.
+
+                No flags or registers in the microprocessor are affected by the store operation.",
+        1,
+        [
+            [Y_INDEXED_ABSOLUTE, 0x9C, 3, 5, True],
+        ],
+    )
+HelpMessage("STA",
+        "Store accumulator in memory",
+        "A -> M",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "This instruction transfers the contents of the accumulator to memory
+
+                This instruction affects none of the flags in the processor status register and does not affect the
+        accumulator.",
+        7,
+        [
+            [ABSOLUTE                    , 0x8D, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0x9D, 3, 5, False],
+            [Y_INDEXED_ABSOLUTE          , 0x99, 3, 5, False],
+            [ZERO_PAGE                   , 0x85, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0x95, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x81, 2, 6, False],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0x91, 2, 6, False],
+        ],
+    )
+HelpMessage("STX",
+        "Store index X register in memory",
+        "X -> M",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "This instruction transfers the contents of the X index register to memory
+
+                This instruction affects none of the flags in the processor status register and does not affect the
+        accumulator.",
+        3,
+        [
+            [ABSOLUTE           , 0x8E, 3, 4, False],
+            [ZERO_PAGE          , 0x86, 2, 3, False],
+            [Y_INDEXED_ZERO_PAGE, 0x96, 2, 4, False],
+        ],
+    )
+HelpMessage("STY",
+        "Store index X register in memory",
+        "Y -> M",
+        "Load",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "This instruction transfers the contents of the Y index register to memory
+
+                This instruction affects none of the flags in the processor status register and does not affect the
+        accumulator.",
+        3,
+        [
+            [ABSOLUTE           , 0x8C, 3, 4, False],
+            [ZERO_PAGE          , 0x84, 2, 3, False],
+            [Y_INDEXED_ZERO_PAGE, 0x94, 2, 4, False],
+        ],
+    )
+HelpMessage("SHS",
+        "Transfer Accumulator \"AND\" Index Register X to Stack Pointer then Store Stack Pointer \"AND\" Hi-Byte In Memory",
+        "A & X -> SP, SP & (H + 1) -> M",
+        "Trans",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "The undocumented SHS instruction performs a bit-by-bit AND operation of the value of the accumulator and
+        the value of the index register X and stores the result in the stack pointer. It then performs a bit-by-bit AND
+        operation of the resulting stack pointer and the upper 8 bits of the given address (ignoring the addressing
+        mode's Y offset), plus 1, and transfers the result to the addressed memory location.
+
+                No flags or registers in the microprocessor are affected by the store operation.",
+        1,
+        [
+            [Y_INDEXED_ABSOLUTE, 0x9B, 3, 5, True],
+        ],
+    )
+HelpMessage("TAX",
+        "Transfer accumulator to index X",
+        "A -> X",
+        "Trans",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction takes the value from the accumulator and transfers or loads it into the index register X
+        without disturbing the contents of the accumulator.
+
+                TAX only affects the index register X, and does not affect the C or V flags. The N flag is set if the
+        resultant value in the index register X has bit 7 on, otherwise it is reset. The Z flag is set if the contents
+        of the index register X is 0 after the operation, otherwise it is reset.",
+        1,
+        [
+            [IMPLIED, 0xAA, 1, 2, False],
+        ],
+    )
+HelpMessage("TAY",
+        "Transfer accumulator to index register Y",
+        "A -> Y",
+        "Trans",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction takes the value from the accumulator and transfers or loads it into the index register Y
+        without disturbing the contents of the accumulator.
+
+                TAY only affects the index register Y, and does not affect the C or V flags. The N flag is set if the
+        resultant value in the index register Y has bit 7 on, otherwise it is reset. The Z flag is set if the contents
+        of the index register Y is 0 after the operation, otherwise it is reset.",
+        1,
+        [
+            [IMPLIED, 0xA8, 1, 2, False],
+        ],
+    )
+HelpMessage("TSX",
+        "Transfer stack pointer to index register X",
+        "SP -> X",
+        "Trans",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction takes the value from the stack pointer and transfers or loads it into the index register X
+        without disturbing the contents of the accumulator.
+
+                TAX only affects the index register X, and does not affect the C or V flags. The N flag is set if the
+        resultant value in the index register X has bit 7 on, otherwise it is reset. The Z flag is set if the contents
+        of the index register X is 0 after the operation, otherwise it is reset.",
+        1,
+        [
+            [IMPLIED, 0xBA, 1, 2, False],
+        ],
+    )
+HelpMessage("TXA",
+        "Transfer index register X to accumulator",
+        "X -> A",
+        "Trans",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction takes the value from the index register X and transfers or loads it into the accumulator
+        without disturbing the contents of the accumulator.
+
+                TAX only affects the accumulator, and does not affect the C or V flags. The N flag is set if the
+        resultant value in the accumulator has bit 7 on, otherwise it is reset. The Z flag is set if the contents
+        of the accumulator is 0 after the operation, otherwise it is reset.",
+        1,
+        [
+            [IMPLIED, 0x8A, 1, 2, False],
+        ],
+    )
+HelpMessage("TXS",
+        "Transfer index register X to stack pointer",
+        "X -> A",
+        "Trans",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction takes the value from the index register X and transfers or loads it into the stack pointer
+        without disturbing the contents of the accumulator.
+
+                TAX only affects the stack pointer, and does not affect the C or V flags. The N flag is set if the
+        resultant value in the stack pointer has bit 7 on, otherwise it is reset. The Z flag is set if the contents
+        of the stack pointer is 0 after the operation, otherwise it is reset.",
+        1,
+        [
+            [IMPLIED, 0x9A, 1, 2, False],
+        ],
+    )
+HelpMessage("TYA",
+        "Transfer index register Y to accumulator",
+        "Y -> A",
+        "Trans",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction takes the value from the index register Y and transfers or loads it into the accumulator
+        without disturbing the contents of the accumulator.
+
+                TAX only affects the accumulator, and does not affect the C or V flags. The N flag is set if the
+        resultant value in the accumulator has bit 7 on, otherwise it is reset. The Z flag is set if the contents
+        of the accumulator is 0 after the operation, otherwise it is reset.",
+        1,
+        [
+            [IMPLIED, 0x98, 1, 2, False],
+        ],
+    )
+HelpMessage("PHA",
+        "Push accumulator on stack",
+        "A|v ST, SP--",
+        "Stack",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction transfers the current value of the accumulator to the next location on the stack,
+        automatically decrementing the stack pointer to point to the next vacant location.
+
+                The PHA instruction only affects the stack pointer register which is decremented by 1 as a result of
+        the operation. It does not affect any flags.",
+        1,
+        [
+            [IMPLIED, 0x48, 1, 3, False],
+        ],
+    )
+HelpMessage("PHP",
+        "Push processor status register on stack",
+        "SP|v ST, SP--",
+        "Stack",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction transfers the current value of the processor status register to the next location on the stack,
+        automatically decrementing the stack pointer to point to the next vacant location.
+
+                The PHA instruction only affects the stack pointer register which is decremented by 1 as a result of
+        the operation. It does not affect any flags.",
+        1,
+        [
+            [IMPLIED, 0x08, 1, 3, False],
+        ],
+    )
+HelpMessage("PLA",
+        "Pull accumulator from stack",
+        "SP++, A|^ ST",
+        "Stack",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction increments the stack pointer then pulls the top item
+        from the stack, and transfers it to the accumulator.
+
+                The PLA instruction does not affect the C or V flags. It sets N if bit 7 in
+        the accumulator is on, otherwise resets it. It also sets the Z flag if
+        the accumulator is equal to 0, otherwise resets it. The PLA instruction changes the content
+        of the accumulator to the contents of the memory location at the stack register plus 1, and
+        also increments the stack register.",
+        1,
+        [
+            [IMPLIED, 0x68, 1, 4, False],
+        ],
+    )
+HelpMessage("PLP",
+        "Pull processor status from stack",
+        "SP++, SP|^ ST",
+        "Stack",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction increments the stack pointer then pulls the top item
+        from the stack, and transfers it to the processor status register.
+
+                Because the instruction affects the processor status register, it
+        affects all of the processor flags, with the exception of the B
+        flag, which is never transferred over and is always reset.",
+        1,
+        [
+            [IMPLIED, 0x28, 1, 4, False],
+        ],
+    )
+HelpMessage("ASL",
+        "Arithmetic shift left",
+        "C <- /M7...M0/ <- 0",
+        "Shift",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The shift left instruction shifts either the accumulator or the address memory location 1 bit to the left,
+        with the bit 0 always being set to 0 and the input bit 7 being stored in the carry flag. ASL either shifts
+        the accumulator left 1 bit or is a read/modify/write instruction that affects only memory.
+
+                The instruction does not affect the overflow bit, sets N equal to the result bit 7 (bit 6 in the input), sets
+        Z flag if the result is equal to 0, otherwise resets Z and stores the input bit 7 in the carry flag.
+
+                NOTE: Revision A -> C of the 6502 had a fault with the ROR instruction, where it behaved more like this
+        instruction. Revision D fixed the issue. (see: help ROR)",
+        5,
+        [
+            [ACCUMULATOR        , 0x0A, 1, 2, False],
+            [ABSOLUTE           , 0x0E, 3, 6, False],
+            [X_INDEXED_ABSOLUTE , 0x1E, 3, 7, False],
+            [ZERO_PAGE          , 0x06, 2, 5, False],
+            [X_INDEXED_ZERO_PAGE, 0x16, 2, 6, False],
+        ],
+    )
+HelpMessage("LSR",
+        "Logical shift right",
+        "0 -> /M7...M0/ -> C",
+        "Shift",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.RESET
+        ],
+        "This instruction shifts either the accumulator or a specified memory location 1 bit to the right, with
+        the higher bit of the result always being set to 0, and the low bit which is shifted out of the field being
+        stored in the carry flag.
+
+                The shift right instruction either affects the accumulator by shift­ing it right 1 or is a read/modify/write
+        instruction which changes a specified memory location but does not affect any internal registers. The
+        shift right does not affect the overflow flag. The N flag is always reset. The Z flag is set if the result of
+        the shift is 0 and reset otherwise. The carry is set equal to bit 0 of the input.",
+        5,
+        [
+            [ACCUMULATOR        , 0x4A, 1, 2, False],
+            [ABSOLUTE           , 0x4E, 3, 6, False],
+            [X_INDEXED_ABSOLUTE , 0x5E, 3, 7, False],
+            [ZERO_PAGE          , 0x46, 2, 5, False],
+            [X_INDEXED_ZERO_PAGE, 0x56, 2, 6, False],
+        ],
+    )
+HelpMessage("ROL",
+        "Rotate left",
+        "C <- /M7...M0/ <- C",
+        "Shift",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The rotate left instruction shifts either the accumulator or addressed memory left 1 bit, with the input
+        carry being stored in bit 0 and with the input bit 7 being stored in the carry flags.
+
+                The ROL instruction either shifts the accumulator left 1 bit and stores the carry in accumulator bit 0 or
+        does not affect the internal registers at all. The ROL instruction sets carry equal to the input bit 7, sets
+        N equal to the input bit 6 , sets the Z flag if the result of the ro­ tate is 0, otherwise it resets Z and does
+        not affect the overflow flag at all.",
+        5,
+        [
+            [ACCUMULATOR        , 0x2A, 1, 2, False],
+            [ABSOLUTE           , 0x2E, 3, 6, False],
+            [X_INDEXED_ABSOLUTE , 0x3E, 3, 7, False],
+            [ZERO_PAGE          , 0x26, 2, 5, False],
+            [X_INDEXED_ZERO_PAGE, 0x36, 2, 6, False],
+        ],
+    )
+HelpMessage("ROR",
+        "Rotate right",
+        "C -> /M7...M0/ -> C",
+        "Shift",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The rotate right instruction shifts either the accumulator or addressed memory right 1 bit with bit 0 shifted
+        into the carry and carry shifted into bit 7.
+
+                The ROR instruction either shifts the accumulator right 1 bit and stores the carry in accumulator bit 7 or
+        does not affect the internal registers at all. The ROR instruction sets carry equal to input bit 0, sets N equal
+        to the input carry and sets the Z flag if the result of the rotate is 0; otherwise it resets Z and does not affect
+        the overflow flag at all.
+                (Available on Microprocessors after June, 1976)
+        NOTE: Compiling with the INCLUDE_ROR_BUG flag enabled will compile the CPU with the aforementioned bug enabled.
+
+                For context, in early revisions of the MOS 6502 (revisions before June 1976) had a bug with this instruction. It
+        behaved more or less like the ASL instruction (see: help ASL). The bug was finally patched in the revision D of
+        the chip. (see https://www.pagetable.com/?p=406 for more info.)",
+        5,
+        [
+            [ACCUMULATOR        , 0x6A, 1, 2, False],
+            [ABSOLUTE           , 0x6E, 3, 6, False],
+            [X_INDEXED_ABSOLUTE , 0x7E, 3, 7, False],
+            [ZERO_PAGE          , 0x66, 2, 5, False],
+            [X_INDEXED_ZERO_PAGE, 0x76, 2, 6, False],
+        ],
+    )
+HelpMessage("AND",
+        "\"AND\" memory with accumulator",
+        "A & M -> A",
+        "Logic",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The AND instruction transfer the accumulator and memory to the adder which performs a bit-by-bit AND
+        operation and stores the result back in the accumulator.
+
+                This instruction affects the accumulator; sets the zero flag if the result in the accumulator is 0, otherwise
+        resets the zero flag; sets the negative flag if the result in the accumulator has bit 7 on, otherwise resets the
+        negative flag.",
+        8,
+        [
+            [IMMEDIATE                   , 0x29, 2, 2, False],
+            [ABSOLUTE                    , 0x2D, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0x3D, 3, "4+p", False],
+            [Y_INDEXED_ABSOLUTE          , 0x39, 3, "4+p", False],
+            [ZERO_PAGE                   , 0x25, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0x35, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x21, 2, 6, False],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0x31, 2, "5+p", False)
+        ],
+    )
+HelpMessage("BIT",
+        "Test bits in memory with accumulator",
+        "A & M, M7 -> N, M6 -> V",
+        "Logic",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction performs an AND between a memory location and the accumulator but does not store the
+        result of the AND into the accumulator.
+
+                The bit instruction affects the N flag with N being set to the value of bit 7 of the memory being tested, the V
+        flag with V being set equal to bit 6 of the memory being tested and Z being set by the result of the AND
+        operation between the accumulator and the memory if the result is Zero, Z is reset otherwise. It does not
+        affect the accumulator.",
+        2,
+        [
+            [ABSOLUTE , 0x2C, 3, 4, False],
+            [ZERO_PAGE, 0x24, 2, 3, False],
+        ],
+    )
+HelpMessage("EOR",
+        "\"Exclusive OR\" memory with accumulator",
+        "A ^ M -> A",
+        "Logic",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The EOR instruction transfers the memory and the accumulator to the adder which performs a binary
+        \"EXCLUSIVE OR\" on a bit-by-bit basis and stores the result in the accumulator.
+
+                This instruction affects the accumulator; sets the zero flag if the result in the accumulator is 0, otherwise
+        resets the zero flag sets the negative flag if the result in the accumulator has bit 7 on, otherwise resets the
+        negative flag.",
+        8,
+        [
+            [IMMEDIATE                   , 0x49, 2, 2, False],
+            [ABSOLUTE                    , 0x4D, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0x5D, 3, "4+p", False],
+            [Y_INDEXED_ABSOLUTE          , 0x59, 3, "4+p", False],
+            [ZERO_PAGE                   , 0x45, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0x55, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x41, 2, 6, False],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0x51, 2, "5+p", False)
+        ],
+    )
+HelpMessage("ORA",
+        "\"OR\" memory with accumulator",
+        "A | M -> A",
+        "Logic",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The ORA instruction transfers the memory and the accumulator to the adder which performs a binary \"OR\"
+        on a bit-by-bit basis and stores the result in the accumulator.
+
+                This instruction affects the accumulator; sets the zero flag if the result in the accumulator is 0, otherwise
+        resets the zero flag; sets the negative flag if the result in the accumulator has bit 7 on, otherwise resets the
+        negative flag.",
+        8,
+        [
+            [IMMEDIATE                   , 0x09, 2, 2, False],
+            [ABSOLUTE                    , 0x0D, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0x1D, 3, "4+p", False],
+            [Y_INDEXED_ABSOLUTE          , 0x19, 3, "4+p", False],
+            [ZERO_PAGE                   , 0x05, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0x15, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x01, 2, 6, False],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0x11, 2, "5+p", False)
+        ],
+    )
+HelpMessage("ADC",
+        "Add memory to accumulator with carry",
+        "A + M + C -> A, C",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction adds the value of memory and carry from the previous operation to the value of the
+        accumulator and stores the result in the accumulator.
+
+                This instruction affects the accumulator; sets the carry flag when the sum of a binary add exceeds 255 or
+        when the sum of a decimal add exceeds 99, otherwise carry is reset. The overflow flag is set when the sign
+        or bit 7 is changed due to the result exceeding +127 or -128, otherwise overflow is reset. The negative flag
+        is set if the accumulator result contains bit 7 on, otherwise the negative flag is reset. The zero flag is set if
+        the accumulator result is 0, otherwise the zero flag is reset.
+        NOTE: In decimal mode, the N, V and Z flags are not consistent with the decimal result.",
+        8,
+        [
+            [IMMEDIATE                   , 0x69, 2, 2, False],
+            [ABSOLUTE                    , 0x6D, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0x7D, 3, "4+p", False],
+            [Y_INDEXED_ABSOLUTE          , 0x79, 3, "4+p", False],
+            [ZERO_PAGE                   , 0x65, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0x75, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x61, 2, 6, False],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0x71, 2, "5+p", False)
+        ],
+    )
+HelpMessage("ANC",
+        "\"AND\" memory with accumulator then move negative flag to carry flag",
+        "A & M -> A, N -> C",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The undocumented ANC instruction performs a bit-by-bit AND operation of the accumulator and memory
+        and stores the result back in the accumulator.
+
+                This instruction affects the accumulator; sets the zero flag if the result in the accumulator is 0, otherwise
+        resets the zero flag; sets the negative flag and the carry flag if the result in the accumulator has bit 7 on,
+        otherwise resets the negative flag and the carry flag.",
+        2,
+        [
+            [IMMEDIATE, 0x0B, 2, 2, True],
+            [IMMEDIATE, 0x2B, 2, 2, True],
+        ],
+    )
+HelpMessage("ARR",
+        "\"AND\" accumulator then rotate right",
+        "(A & M) / 2 -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The undocumented ARR instruction performs a bit-by-bit \"AND\" operation of the accumulator and memory,
+        then shifts the result right 1 bit with bit 0 shifted into the carry and carry shifted into bit 7. It then stores the
+        result back in the accumulator.
+
+                If bit 7 of the result is on, then the N flag is set, otherwise it is reset. The instruction sets the Z flag if the
+        result is 0; otherwise it resets Z.
+
+                The V and C flags depends on the Decimal Mode Flag:
+
+                In decimal mode, the V flag is set if bit 6 is different than the original data's bit 6, otherwise the V flag is
+        reset. The C flag is set if (operand & 0xF0) + (operand & 0x10) is greater than 0x50, otherwise the C flag is
+        reset.
+
+                In binary mode, the V flag is set if bit 6 of the result is different than bit 5 of the result, otherwise the V flag is
+        reset. The C flag is set if the result in the accumulator has bit 6 on, otherwise it is reset.",
+        1,
+        [
+            [IMMEDIATE, 0x6B, 2, 2, True],
+        ],
+    )
+HelpMessage("ASR",
+        "\"AND\" then logical shift right",
+        "(A & M) / 2 -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.RESET
+        ],
+        "The undocumented ASR instruction performs a bit-by-bit AND operation of the accumulator and memory,
+        then shifts the accumulator 1 bit to the right, with the higher bit of the result always being set to 0, and the
+        low bit which is shifted out of the field being stored in the carry flag.
+
+                This instruction affects the accumulator. It does not affect the overflow flag. The N flag is always reset. The
+        Z flag is set if the result of the shift is 0 and reset otherwise. The carry is set equal to bit 0 of the result of the
+        \"AND\" operation",
+        1,
+        [
+            [IMMEDIATE, 0x4B, 2, 2, True],
+        ],
+    )
+HelpMessage("CMP",
+        "Compare memory and accumulator",
+        "A - M",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction subtracts the contents of memory from the contents of the accumulator.
+
+                The use of the CMP affects the following flags: Z flag is set on an equal comparison, reset otherwise; the N
+
+        flag is set or reset by the result bit 7, the carry flag is set when the value in memory is less than or equal to
+        the accumulator, reset when it is greater than the accumulator. The accumulator is not affected.",
+        8,
+        [
+            [IMMEDIATE                   , 0xC9, 2, 2, False],
+            [ABSOLUTE                    , 0xCD, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0xDD, 3, "4+p", False],
+            [Y_INDEXED_ABSOLUTE          , 0xD9, 3, "4+p", False],
+            [ZERO_PAGE                   , 0xC5, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0xD5, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0xC1, 2, 6, False],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0xD1, 2, "5+p", False)
+        ],
+    )
+HelpMessage("CPX",
+        "Compare index register X to memory",
+        "X - M",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction subtracts the value of the addressed memory location from the content of index register X
+        using the adder but does not store the result; therefore, its only use is to set the N, Z and C flags to allow for
+        comparison between the index register X and the value in memory.
+
+                The CPX instruction does not affect any register in the machine; it also does not affect the overflow flag. It
+        causes the carry to be set on if the absolute value of the index register X is equal to or greater than the data
+        from memory. If the value of the memory is greater than the content of the index register X, carry is reset. If
+        the results of the subtraction contain a bit 7, then the N flag is set, if not, it is reset. If the value in memory is
+        equal to the value in index register X, the Z flag is set, otherwise it is reset.",
+        3,
+        [
+            [IMMEDIATE, 0xE0, 2, 2, False],
+            [ABSOLUTE , 0xEC, 3, 4, False],
+            [ZERO_PAGE, 0xE4, 2, 3, False],
+        ],
+    )
+HelpMessage("CPY",
+        "Compare index register Y to memory",
+        "Y - M",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction performs a two's complement subtraction between the index register Y and the specified
+        memory location. The results of the subtraction are not stored anywhere. The instruction is strictly used to
+        set the flags
+
+                CPY affects no registers in the microprocessor and also does not affect the overflow flag. If the value in the
+        index register Y is equal to or greater than the value in the memory, the carry flag will be set, otherwise it will
+        be cleared. If the results of the subtraction contain bit 7 on the N bit will be set, otherwise it will be cleared.
+        If the value in the index register Y and the value in the memory are equal, the zero flag will be set, otherwise
+        it will be cleared",
+        3,
+        [
+            [IMMEDIATE, 0xC0, 2, 2, False],
+            [ABSOLUTE , 0xCC, 3, 4, False],
+            [ZERO_PAGE, 0xC4, 2, 3, False],
+        ],
+    )
+HelpMessage("DCP",
+        "Decrement memory by one then compare with accumulator",
+        "M - 1 ->, A - M",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This undocumented instruction subtracts 1, in two's complement, from the contents of the addressed
+        memory location. It then subtracts the contents of memory from the contents of the accumulator.
+
+                The DCP instruction does not affect any internal register in the microprocessor. It does not affect the
+        overflow flag. Z flag is set on an equal comparison, reset otherwise; the N flag is set or reset by the result bit
+        7, the carry flag is set when the result in memory is less than or equal to the accumulator, reset when it is
+        greater than the accumulator.",
+        7,
+        [
+            [ABSOLUTE                    , 0xCF, 3, 6, True],
+            [X_INDEXED_ABSOLUTE          , 0xDF, 3, 7, True],
+            [Y_INDEXED_ABSOLUTE          , 0xDB, 3, 7, True],
+            [ZERO_PAGE                   , 0xC7, 2, 5, True],
+            [X_INDEXED_ZERO_PAGE         , 0xD7, 2, 6, True],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0xC3, 2, 8, True],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0xD3, 2, 8, True],
+        ],
+    )
+HelpMessage("ISC",
+        "Increment Memory By One then SBC then Subtract Memory from Accumulator with Borrow",
+        "M + 1 -> M, A - M -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This undocumented instruction adds 1 to the contents of the addressed memory location. It then subtracts
+        the value of the result in memory and borrow from the value of the accumulator, using two's complement
+        arithmetic, and stores the result in the accumulator.
+
+                This instruction affects the accumulator. The carry flag is set if the result is greater than or equal to 0. The
+        carry flag is reset when the result is less than 0, indicating a borrow. The overflow flag is set when the result
+        exceeds +127 or -127, otherwise it is reset. The negative flag is set if the result in the accumulator has bit 7
+        on, otherwise it is reset. The Z flag is set if the result in the accumulator is 0, otherwise it is reset.",
+        7,
+        [
+            [ABSOLUTE                    , 0xEF, 3, 6, True],
+            [X_INDEXED_ABSOLUTE          , 0xFF, 3, 7, True],
+            [Y_INDEXED_ABSOLUTE          , 0xFB, 3, 7, True],
+            [ZERO_PAGE                   , 0xE7, 2, 5, True],
+            [X_INDEXED_ZERO_PAGE         , 0xF7, 2, 6, True],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0xE3, 2, 8, True],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0xF3, 2, 8, True],
+        ],
+    )
+HelpMessage("RLA",
+        "Rotate left then \"AND\" with accumulator",
+        "C <- /M7...M0/ <- C, A & M -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The undocumented RLA instruction shifts the addressed memory left 1 bit, with the input carry being stored
+        in bit 0 and with the input bit 7 being stored in the carry flags. It then performs a bit-by-bit AND operation of
+        the result and the value of the accumulator and stores the result back in the accumulator.
+
+                This instruction affects the accumulator; sets the zero flag if the result in the accumulator is 0, otherwise
+        resets the zero flag; sets the negative flag if the result in the accumulator has bit 7 on, otherwise resets the
+        negative flag.",
+        7,
+        [
+            [ABSOLUTE                    , 0x2F, 3, 6, False],
+            [X_INDEXED_ABSOLUTE          , 0x3F, 3, 7, False],
+            [Y_INDEXED_ABSOLUTE          , 0x3B, 3, 7, False],
+            [ZERO_PAGE                   , 0x27, 2, 5, False],
+            [X_INDEXED_ZERO_PAGE         , 0x37, 2, 6, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x23, 2, 8, False],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0x33, 2, 8, False],
+        ],
+    )
+HelpMessage("RRA",
+        "Rotate right then add memory with accumulator",
+        "C -> /M7...M0/ -> C, A + M + C -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The undocumented RRA instruction shifts the addressed memory right 1 bit with bit 0 shifted into the carry
+        and carry shifted into bit 7. It then adds the result and generated carry to the value of the accumulator and
+        stores the result in the accumulator.
+
+                This instruction affects the accumulator; sets the carry flag when the sum of a binary add exceeds 255 or
+        when the sum of a decimal add exceeds 99, otherwise carry is reset. The overflow flag is set when the sign
+        or bit 7 is changed due to the result exceeding +127 or -128, otherwise overflow is reset. The negative flag
+        is set if the accumulator result contains bit 7 on, otherwise the negative flag is reset. The zero flag is set if
+        the accumulator result is 0, otherwise the zero flag is reset.",
+        7,
+        [
+            [ABSOLUTE                    , 0x6F, 3, 6, True],
+            [X_INDEXED_ABSOLUTE          , 0x7F, 3, 7, True],
+            [Y_INDEXED_ABSOLUTE          , 0x7B, 3, 7, True],
+            [ZERO_PAGE                   , 0x67, 2, 5, True],
+            [X_INDEXED_ZERO_PAGE         , 0x77, 2, 6, True],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x63, 2, 8, True],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0x73, 2, 8, True],
+        ],
+    )
+HelpMessage("SBC",
+        "Subtract memory from accumulator with borrow",
+        "A - M - ~C -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction subtracts the value of memory and borrow from the value of the accumulator, using two's
+        complement arithmetic, and stores the result in the accumulator. Borrow is defined as the carry flag
+        complemented; therefore, a resultant carry flag indicates that a borrow has not occurred.
+
+                This instruction affects the accumulator. The carry flag is set if the result is greater than or equal to 0. The
+        carry flag is reset when the result is less than 0, indicating a borrow. The overflow flag is set when the result
+        exceeds +127 or -127, otherwise it is reset. The negative flag is set if the result in the accumulator has bit 7
+        on, otherwise it is reset. The Z flag is set if the result in the accumulator is 0, otherwise it is reset.
+        NOTE: In decimal mode, the N, V and Z flags are not consistent with the decimal result.",
+        9,
+        [
+            [IMMEDIATE                   , 0xE9, 2, 2, False],
+            [IMMEDIATE                   , 0xEB, 2, 2, True],
+            [ABSOLUTE                    , 0xED, 3, 4, False],
+            [X_INDEXED_ABSOLUTE          , 0xFD, 3, "4+p", False],
+            [Y_INDEXED_ABSOLUTE          , 0xF9, 3, "4+p", False],
+            [ZERO_PAGE                   , 0xE5, 2, 3, False],
+            [X_INDEXED_ZERO_PAGE         , 0xF5, 2, 4, False],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0xE1, 2, 6, False],
+            AddrModeInfo(AddressingModes.ZERO_PAGE_INDIRECT_Y_INDEXED, 0xF1, 2, "5+p", False)
+        ],
+    )
+HelpMessage("SBX",
+        "Subtract memory from accumulator \"AND\" index register X",
+        "(A & X) - M -> X",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This undocumented instruction performs a bit-by-bit \"AND\" of the value of the accumulator and the index
+        register X and subtracts the value of memory from this result, using two's complement arithmetic, and stores
+        the result in the index register X.
+
+                This instruction affects the index register X. The carry flag is set if the result is greater than or equal to 0.
+        The carry flag is reset when the result is less than 0, indicating a borrow. The negative flag is set if the result
+        in index register X has bit 7 on, otherwise it is reset. The Z flag is set if the result in index register X is 0,
+        otherwise it is reset. The overflow flag not affected at all.",
+        1,
+        [
+            [IMMEDIATE, 0xCB, 2, 2, True],
+        ],
+    )
+HelpMessage("SLO",
+        "Arithmetic shift left then \"OR\" memory with accumulator",
+        "M * 2 -> M, A | M -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The undocumented SLO instruction shifts the address memory location 1 bit to the left, with the bit 0 always
+        being set to 0 and the bit 7 output always being contained in the carry flag. It then performs a bit-by-bit \"OR\"
+        operation on the result and the accumulator and stores the result in the accumulator.
+
+                The negative flag is set if the accumulator result contains bit 7 on, otherwise the negative flag is reset. It sets
+        Z flag if the result is equal to 0, otherwise resets Z and stores the input bit 7 in the carry flag.",
+        7,
+        [
+            [ABSOLUTE                    , 0x0F, 3, 6, True],
+            [X_INDEXED_ABSOLUTE          , 0x1F, 3, 7, True],
+            [Y_INDEXED_ABSOLUTE          , 0x1B, 3, 7, True],
+            [ZERO_PAGE                   , 0x07, 2, 5, True],
+            [X_INDEXED_ZERO_PAGE         , 0x17, 2, 6, True],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x03, 2, 8, True],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0x13, 2, 8, True],
+        ],
+    )
+HelpMessage("SRE",
+        "Logical shift right then \"Exclusive OR\" memory with accumulator",
+        "M / 2 -> M, A ^ M -> A",
+        "Arith",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The undocumented SRE instruction shifts the specified memory location 1 bit to the right, with the higher bit
+        of the result always being set to 0, and the low bit which is shifted out of the field being stored in the carry
+        flag. It then performs a bit-by-bit \"EXCLUSIVE OR\" of the result and the value of the accumulator and stores
+        the result in the accumulator.
+
+                This instruction affects the accumulator. It does not affect the overflow flag. The negative flag is set if the
+        accumulator result contains bit 7 on, otherwise the negative flag is reset. The Z flag is set if the result is 0
+        and reset otherwise. The carry is set equal to input bit 0.",
+        7,
+        [
+            [ABSOLUTE                    , 0x0F, 3, 6, True],
+            [X_INDEXED_ABSOLUTE          , 0x1F, 3, 7, True],
+            [Y_INDEXED_ABSOLUTE          , 0x1B, 3, 7, True],
+            [ZERO_PAGE                   , 0x07, 2, 5, True],
+            [X_INDEXED_ZERO_PAGE         , 0x17, 2, 6, True],
+            [X_INDEXED_ZERO_PAGE_INDIRECT, 0x03, 2, 8, True],
+            [ZERO_PAGE_INDIRECT_Y_INDEXED, 0x13, 2, 8, True],
+        ],
+    )
+HelpMessage("XXA",
+        "Non-deterministic operation of accumulator, index register X, memory, and bus contents",
+        "(A & Q) & X & M -> A",
+        "Arith",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "The operation of the undocumented XAA instruction depends on the individual microprocessor. On most
+        machines, it performs a bit-by-bit AND operation of the following three operands: The first two are the index
+        register X and memory.
+
+                The third operand is the result of a bit-by-bit AND operation of the accumulator and a magic component.
+        This magic component depends on the individual microprocessor and is usually one of $00, $EE, $EF, $FE
+        and $FF, and may be influenced by the RDY pin, leftover contents of the data bus, the temperature of the
+        microprocessor, the supplied voltage, and other factors.
+
+                On some machines, additional bits of the result may be set or reset depending on non-deterministic factors.
+
+                It then transfers the result to the accumulator.
+
+                XAA does not affect the C or V flags; sets Z if the value loaded was zero, otherwise resets it; sets N if the
+        result in bit 7 is a 1; otherwise N is reset.",
+        1,
+        [
+            [IMMEDIATE, 0x8B, 2, 2, True],
+        ],
+    )
+HelpMessage("DEC",
+        "Decrement memory by one",
+        "M - 1 -> M",
+        "Inc",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction subtracts 1, in two's complement, from the contents of the addressed memory location.
+
+                The decrement instruction does not affect any internal register in the microprocessor. It does not affect the
+        carry or overflow flags. If bit 7 is on as a result of the decrement, then the N flag is set, otherwise it is reset.
+        If the result of the decrement is 0, the Z flag is set, otherwise it is reset.",
+        4,
+        [
+            [ABSOLUTE           , 0xCE, 3, 6, False],
+            [X_INDEXED_ABSOLUTE , 0xDE, 3, 7, False],
+            [ZERO_PAGE          , 0xC6, 2, 5, False],
+            [X_INDEXED_ZERO_PAGE, 0xD6, 2, 6, False],
+        ],
+    )
+HelpMessage("DEX",
+        "Decrement index register X by one",
+        "X - 1 -> X",
+        "Inc",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction subtracts one from the current value of the index register X and stores the result in the index
+        register X
+
+                DEX does not affect the carry or overflow flag, it sets the N flag if it has bit 7 on as a result of the decrement,
+        otherwise it resets the N flag; sets the Z flag if X is a 0 as a result of the decrement, otherwise it resets the Z
+        flag.",
+        1,
+        [
+            [IMPLIED, 0xCA, 1, 2, False],
+        ],
+    )
+HelpMessage("DEY",
+        "Decrement index register Y by one",
+        "Y - 1 -> Y",
+        "Inc",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction subtracts one from the current value in the index register Y and stores the result into the
+        index register Y. The result does not affect or consider carry so that the value in the index register Y is
+        decremented to 0 and then through 0 to FF.
+
+                Decrement Y does not affect the carry or overflow flags; if the Y register contains bit 7 on as a result of the
+        decrement the N flag is set, otherwise the N flag is reset. If the Y register is 0 as a result of the decrement,
+        the Z flag is set otherwise the Z flag is reset. This instruction only affects the index register Y.",
+        1,
+        [
+            [IMPLIED, 0x88, 1, 2, False],
+        ],
+    )
+HelpMessage("INC",
+        "Increment memory by one",
+        "M + 1 -> M",
+        "Inc",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction adds 1 to the contents of the addressed memory location.
+
+                The increment memory instruction does not affect any internal registers and does not affect the carry or
+        overflow flags. If bit 7 is on as the result of the increment,N is set, otherwise it is reset; if the increment
+        causes the result to become 0, the Z flag is set on, otherwise it is reset.",
+        4,
+        [
+            [ABSOLUTE           , 0xEE, 3, 6, False],
+            [X_INDEXED_ABSOLUTE , 0xFE, 3, 7, False],
+            [ZERO_PAGE          , 0xE6, 2, 5, False],
+            [X_INDEXED_ZERO_PAGE, 0xF6, 2, 6, False],
+        ],
+    )
+HelpMessage("INX",
+        "Increment index register X by one",
+        "X + 1 -> X",
+        "Inc",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "Increment X adds 1 to the current value of the X register. This is an 8-bit increment which does not affect the
+        carry operation, therefore, if the value of X before the increment was FF, the resulting value is 00.
+
+                INX does not affect the carry or overflow flags; it sets the N flag if the result of the increment has a one in bit
+        7, otherwise resets N; sets the Z flag if the result of the increment is 0, otherwise it resets the Z flag.
+
+                INX does not affect any other register other than the X register.",
+        1,
+        [
+            [IMPLIED, 0xE8, 1, 2, False],
+        ],
+    )
+HelpMessage("INY",
+        "Increment index register Y by one",
+        "Y + 1 -> Y",
+        "Inc",
+        [Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED
+        ],
+        "Increment Y increments or adds one to the current value in the Y register, storing the result in the Y register.
+        As in the case of INX the primary application is to step thru a set of values using the Y register.
+
+                The INY does not affect the carry or overflow flags, sets the N flag if the result of the increment has a one in
+        bit 7, otherwise resets N, sets Z if as a result of the increment the Y register is zero otherwise resets the Z
+        flag.",
+        1,
+        [
+            [IMPLIED, 0xC8, 1, 2, False],
+        ],
+    )
+HelpMessage("BRK",
+        "Software breakpoint command",
+        "PC + 2|v ST, SP--, [FFFE], -> PCL, [FFFF], -> PCH",
+        "Ctrl",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.INITIALIZED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "The break command causes the microprocessor to go through an interrupt sequence under program
+        control. This means that the program counter of the second byte after the BRK. is automatically stored on
+        the stack along with the processor status at the beginning of the break instruction. The microprocessor then
+        transfers control to the interrupt vector.
+
+                Other than changing the program counter, the break instruction changes no values in either the registers or
+        the flags.",
+        1,
+        [
+            [IMPLIED, 0x00, 1, 7, False],
+        ],
+    )
+HelpMessage("JMP",
+        "JMP indirect",
+        "[PC + 1], -> PCL, [PC + 2], -> PCH",
+        "Ctrl",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction establishes a new value for the program counter.
+
+                It affects only the program counter in the microprocessor and affects no flags in the status register.",
+        2,
+        [
+            [ABSOLUTE         , 0x4C, 3, 3, False],
+            [ABSOLUTE_INDIRECT, 0x6C, 3, 5, False],
+        ],
+    )
+HelpMessage("JSR",
+        "Jump to subroutine",
+        "PC + 2|v ST, SP--, [PC + 1], -> PCL, [PC + 2], -> PCH",
+        "Ctrl",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction transfers control of the program counter to a subroutine location but leaves a return pointer
+        on the stack to allow the user to return to perform the next instruction in the main program after the
+        subroutine is complete. To accomplish this, JSR instruction stores the program counter address which
+        points to the last byte of the jump instruction onto the stack using the stack pointer. The stack byte contains
+        the program count high first, followed by program count low. The JSR then transfers the addresses following
+        the jump instruction to the program counter low and the program counter high, thereby directing the program
+        to begin at that new address.
+
+                The JSR instruction affects no flags, causes the stack pointer to be decremented by 2 and substitutes new
+        values into the program counter low and the program counter high.",
+        1,
+        [
+            [ABSOLUTE, 0x20, 3, 6, False],
+        ],
+    )
+HelpMessage("RTI",
+        "Return from interrupt",
+        "SR|v ST, SP--, PC + 2|v ST, SP--,",
+        "Ctrl",
+        [Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.AFFECTED,
+            Flag.AFFECTED
+        ],
+        "This instruction transfers from the stack into the microprocessor the processor status and the program
+        counter location for the instruction which was interrupted. By virtue of the interrupt having stored this data 
+        before executing the instruction and the fact that the RTI reinitializes the microprocessor to the same state
+        as when it was interrupted, the combination of interrupt plus RTI allows truly reentrant coding.
+
+                The RTI instruction reinitializes all flags to the position to the point they were at the time the interrupt was
+        taken and sets the program counter back to its pre-interrupt state. It affects no other registers in the
+        microprocessor.",
+        1,
+        [
+            [IMPLIED, 0x40, 1, 6, False],
+        ],
+    )
+HelpMessage("RTS",
+        "Return from subroutine",
+        "SR|v ST, SP--, PC + 1 -> PC",
+        "Ctrl",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction loads the program count low and program count high from the stack into the program
+        counter and increments the program counter so that it points to the instruction following the JSR. The stack
+        pointer is adjusted by incrementing it twice.
+
+                The RTS instruction does not affect any flags and affects only PCL and PCH.",
+        1,
+        [
+            [IMPLIED, 0x60, 1, 6, False],
+        ],
+    )
+HelpMessage("BCC",
+        "Branch on carry clear",
+        "Branch if C == 0",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction tests the state of the carry bit and takes a conditional branch if the carry bit is reset.
+
+                It affects no flags or registers other than the program counter and then only if the C flag is not on.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0x90, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("BCS",
+        "Branch on carry set",
+        "Branch if C == 1",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction takes the conditional branch if the carry flag is on.
+
+                BCS does not affect any of the flags or registers except for the program counter and only then if the carry
+        flag is on.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0xB0, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("BEQ",
+        "Branch on result zero",
+        "Branch if Z == 1",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction could also be called \"Branch on Equal.\"
+
+                It takes a conditional branch whenever the Z flag is on or the previous result is equal to 0.
+
+                BEQ does not affect any of the flags or registers other than the program counter and only then when the Z
+        flag is set.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0xF0, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("BMI",
+        "Branch on result minus",
+        "Branch if N == 1",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction takes the conditional branch if the N bit is set.
+
+                BMI does not affect any of the flags or any other part of the machine other than the program counter and
+        then only if the N bit is on.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0x30, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("BNE",
+        "Branch on result not zero",
+        "Branch if Z == 0",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction could also be called \"Branch on Not Equal.\" It tests the Z flag and takes the conditional
+        branch if the Z flag is not on, indicating that the previous result was not zero.
+
+                BNE does not affect any of the flags or registers other than the program counter and only then if the Z flag is
+        reset.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0xD0, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("BPL",
+        "Branch on result plus",
+        "Branch if N == 0",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction is the complementary branch to branch on result minus. It is a conditional branch which
+        takes the branch when the N bit is reset (0). BPL is used to test if the previous result bit 7 was off (0) and
+        branch on result minus is used to determine if the previous result was minus or bit 7 was on (1).
+
+                The instruction affects no flags or other registers other than the P counter and only affects the P counter
+        when the N bit is reset.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0x10, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("BVC",
+        "Branch on overflow clear",
+        "Branch if V == 0",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction tests the status of the V flag and takes the conditional branch if the flag is not set.
+
+                BVC does not affect any of the flags and registers other than the program counter and only when the
+        overflow flag is reset.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0x50, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("BVS",
+        "Branch on overflow set",
+        "Branch if V == 1",
+        "Bra",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction tests the V flag and takes the conditional branch if V is on.
+
+                BVS does not affect any flags or registers other than the program, counter and only when the overflow flag
+        is set.",
+        1,
+        [
+            AddrModeInfo(AddressingModes.RELATIVE, 0x70, 2, "2+t+p", False)
+        ],
+    )
+HelpMessage("CLC",
+        "Clear carry flag",
+        "0 -> C",
+        "Flags",
+        [Flag.RESET,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction initializes the carry flag to a 0. This operation should normally precede an ADC loop. It is
+        also useful when used with a R0L instruction to clear a bit in memory.
+
+                This instruction affects no registers in the microprocessor and no flags other than the carry flag which is
+        reset.",
+        1,
+        [
+            [IMPLIED, 0x18, 1, 2, False],
+        ],
+    )
+HelpMessage("CLD",
+        "Clear decimal mode flag",
+        "0 -> D",
+        "Flags",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.RESET,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction sets the decimal mode flag to a 0. This all subsequent ADC and SBC instructions to operate
+        as simple operations.
+
+                CLD affects no registers in the microprocessor and no flags other than the decimal mode flag which is set to
+        a 0.",
+        1,
+        [
+            [IMPLIED, 0xD8, 1, 2, False],
+        ],
+    )
+HelpMessage("CLI",
+        "Clear interrupt disable flag",
+        "0 -> I",
+        "Flags",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.RESET,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction initializes the interrupt disable to a 0. This allows the microprocessor to receive interrupts.
+
+                It affects no registers in the microprocessor and no flags other than the interrupt disable which is cleared.",
+        1,
+        [
+            [IMPLIED, 0x58, 1, 2, False],
+        ],
+    )
+HelpMessage("CLV",
+        "Clear overflow flag",
+        "0 -> V",
+        "Flags",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.RESET,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction clears the overflow flag to a 0. This command is used in conjunction with the set overflow
+        pin which can change the state of the overflow flag with an external signal.
+
+                CLV affects no registers in the microprocessor and no flags other than the overflow flag which is set to a 0.",
+        1,
+        [
+            [IMPLIED, 0x58, 1, 2, False],
+        ],
+    )
+HelpMessage("SEC",
+        "Set carry flag",
+        "1 -> C",
+        "Flags",
+        [Flag.INITIALIZED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction initializes the carry flag to a 1. This operation should normally precede a SBC loop. It is also
+        useful when used with a ROL instruction to initialize a bit in memory to a 1.
+
+                This instruction affects no registers in the microprocessor and no flags other than the carry flag which is set.",
+        1,
+        [
+            [IMPLIED, 0x38, 1, 2, False],
+        ],
+    )
+HelpMessage("SED",
+        "Set decimal mode flag",
+        "1 -> D",
+        "Flags",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.INITIALIZED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction sets the decimal mode flag D to a 1. This makes all subsequent ADC and SBC instructions
+        operate as a decimal arithmetic operation.
+
+                SED affects no registers in the microprocessor and no flags other than the decimal mode which is set to a 1.
+        NOTE: The value of this flag is indeterminate after a Flag.RESET",
+        1,
+        [
+            [IMPLIED, 0xF8, 1, 2, False],
+        ],
+    )
+HelpMessage("SEI",
+        "Set interrupt disable flag",
+        "1 -> I",
+        "Flags",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.INITIALIZED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED
+        ],
+        "This instruction initializes the interrupt disable to a 1. It is used to mask interrupt requests during system
+        reset operations and during interrupt commands.
+
+                It affects no registers in the microprocessor and no flags other than the interrupt disable which is set.",
+        1,
+        [
+            [IMPLIED, 0x78, 1, 2, False],
+        ],
+    )
+HelpMessage("NOP",
+        "No operation",
+        "No operation",
+        "Nop",
+        [Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+            Flag.NOT_AFFECTED,
+        ],
+        "The name says it all. This command does nothing but waste time for 2 instructions. Can be used to align commands
+        up to execute on a certain clock cycle, or to waste for the sake of it.
+
+                Wasting time is fun!",
+        28,
+        [
+            [IMPLIED            , 0x1A, 1, 2, True],
+            [IMPLIED            , 0x3A, 1, 2, True],
+            [IMPLIED            , 0x5A, 1, 2, True],
+            [IMPLIED            , 0x7A, 1, 2, True],
+            [IMPLIED            , 0xDA, 1, 2, True],
+            [IMPLIED            , 0xEA, 1, 2, False],
+            [IMPLIED            , 0xFA, 1, 2, True],
+            [IMMEDIATE          , 0x80, 2, 2, True],
+            [IMMEDIATE          , 0x82, 2, 2, True],
+            [IMMEDIATE          , 0x89, 2, 2, True],
+            [IMMEDIATE          , 0xC2, 2, 2, True],
+            [IMMEDIATE          , 0xE2, 2, 2, True],
+            [ABSOLUTE           , 0x0C, 3, 4, True],
+            [X_INDEXED_ABSOLUTE , 0x1C, 3, "4+p", True],
+            [X_INDEXED_ABSOLUTE , 0x3C, 3, "4+p", True],
+            [X_INDEXED_ABSOLUTE , 0x5C, 3, "4+p", True],
+            [X_INDEXED_ABSOLUTE , 0x7C, 3, "4+p", True],
+            [X_INDEXED_ABSOLUTE , 0xDC, 3, "4+p", True],
+            [X_INDEXED_ABSOLUTE , 0xFC, 3, "4+p", True],
+            [ZERO_PAGE          , 0x04, 2, 3, True],
+            [ZERO_PAGE          , 0x44, 2, 3, True],
+            [ZERO_PAGE          , 0x64, 2, 3, True],
+            [X_INDEXED_ZERO_PAGE, 0x14, 2, 4, True],
+            [X_INDEXED_ZERO_PAGE, 0x34, 2, 4, True],
+            [X_INDEXED_ZERO_PAGE, 0x54, 2, 4, True],
+            [X_INDEXED_ZERO_PAGE, 0x74, 2, 4, True],
+            [X_INDEXED_ZERO_PAGE, 0xD4, 2, 4, True],
+            [X_INDEXED_ZERO_PAGE, 0xF4, 2, 4, True],
+        ],
+    ],
+],;
+
